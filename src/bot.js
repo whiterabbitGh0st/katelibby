@@ -1,78 +1,78 @@
+
 /*
  * bot.js
- *
- *
+ *  Description: This is a Node.js IRC bot used for wh.iterabb.it
+ *  Authors: Beau Bouchard (@Beaubouchard)
+ *           Turner ()
  * */
-function KATE () {
-    this.bot;
-    this.config =
-    {
-        autoConnect: true,
-        autoRejoin: true,
-        certExpired: false,
-        channelPrefixes: "&#",
-        channels: ['#general'],
-        debug: false,
-        floodProtection: false,
-        floodProtectionDelay: 1000,
-        messageSplit: 512,
-        port: 6667,
-        realName: 'Kate Libby',
-        sasl: false,
-        secure: false,
-        selfSigned: false,
-        server: "localhost",
-        showErrors: false,
-        stripColors: false,
-        userName: 'kate'
-    };
-    this.irc            = require('irc');
-}
-KATE.prototype = {
-    initialize: function()
-    {
-        this.initBot();
-        this.startListener();
-    },
-    initBot: function()
-    {
-        this.bot = new this.irc.Client(
-            this.config.server,
-            this.config.userName,
+    var commandChar = '.';
+    var cmd = {};
+
+        cmd['luck']=     function(){kateLuck();};
+        cmd['help']=     function(){kateHelp();};
+    
+
+        var irc            = require('irc');
+        var currentChannel = "#katetest";
+        var config =    {
+            autoConnect: true,
+            autoRejoin: true,
+            certExpired: false,
+            channelPrefixes: "&#",
+            channels: ['#katetest'],
+            debug: false,
+            floodProtection: false,
+            floodProtectionDelay: 1000,
+            messageSplit: 512,
+            port: 6667,
+            realName: 'Kate Libby',
+            sasl: false,
+            secure: false,
+            selfSigned: false,
+            server: "localhost",
+            showErrors: false,
+            stripColors: false,
+            userName: 'kate'
+        };
+        var bot = new irc.Client(
+            config.server,
+            config.userName,
             {
-                realname:   this.config.realName,
-                channels:   this.config.channels,
-                username:   this.config.userName
-            });
-    },
-    startListener: function()
+                realname:   config.realName,
+                channels:   config.channels,
+                username:   config.userName
+        });
+    }
+
+
+    function startListening()
     {
-        this.bot.addListener('message', function (from, to, text, message)
-            {
-                //command prefix is going to be .
-                if(text.charAt(0) == ".")
-                {
-                        var commandreg = (?:^|(?:\.\s))(\w+);
-                        var commandStack = message.match(commandreg);
-                        //foreach commandstack
-                        //  process command
-                }
-            });
-       // this.bot.addListener();
-    },
-    processCommand: function(incCommand)
-    {
-        switch(inCommand)
+        bot.addListener('error', function(message) {
+                console.log('error: ', message);
+        });
+
+        bot.addListener('message', function (from, to, text, message)
         {
-            case '.help':
-                this.bot.say("");
-        }
+            if(text.charAt(0) == commandChar){
+                var firstWord = codeLine.substr(0, codeLine.indexOf(" "));
+                cmd[firstWord]();
+            }
+        });
+    }
+
+    function kateHelp()
+    {
+        var msg = "Hello, I am Kate Libby, a bot. My commands are: .help, .luck";
+        bot.say(currentChannel,msg);
+    }
+
+    function kateLuck()
+    {
+        var msg = "FCUK";
+        bot.say(currentChannel,msg);
     }
 
 
 
-
-}
-
-katebot = new KATE();
-katebot.initialize();
+    initBot();
+    startListening();
