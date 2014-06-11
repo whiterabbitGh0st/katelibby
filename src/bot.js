@@ -6,19 +6,20 @@
  * */
     var commandChar = '!';
     var cmd = {};
+    var queryswap = "";
 
-        cmd['luck']=     function() { return kateLuck(); };
-        cmd['help']=     function() { return kateHelp(); };
-        cmd['8ball']=   function() {  return kate8Ball();};
-        cmd['fort']=      function() {return kateFortune();}
-
+        cmd['luck']=     function(x) { return kateLuck(); };
+        cmd['help']=     function(x) { return kateHelp(); };
+        cmd['8ball']=    function(x) { return kate8Ball();};
+        cmd['fort']=     function(x) { return kateFortune();};
+        cmd['g']=        function(incargs) { return kateGoogle(incargs); };
 
     var http = require('http');
     var url = require('url');
     var path = require('path');
-
+    var google = require('google');
     var irc            = require('irc');
-    var currentChannel = "#katetest";
+    var currentChannel = "#general";
     var config =    {
             autoConnect: true,
             autoRejoin: true,
@@ -60,9 +61,10 @@
                 if(text.indexOf(" ") >= 0)
                 {
                     //command with arguements
-                    var cmdWord = text.substr(text.indexOf(commandChar), text.indexOf(" "));
+                    var cmdWord = text.substr(1, text.indexOf(" ")-1);
                     var commandArg =  text.substr(text.indexOf(" "),text.length);
-                    runCmd(cmdWord,from);
+                    queryswap = commandArg;
+                    runCmd(cmdWord,from,commandArg);
                 }
                 else
                 {
@@ -97,13 +99,28 @@
                 var str=chunk.toString();
                 var match = re.exec(str);
                 if (match && match[2]) {
-                    bot.say(currentChannel,match[2]);
+                    bot.say(currentChannel,"[ " + match[2] + " ]");
                 }
             });
         });
     }
 
 
+    function runCmd(incCmd, incFrom, incArg)
+    {
+        var response = "";
+        console.log(incCmd);
+        if (typeof cmd[incCmd] == 'function')
+        {
+            response = cmd[incCmd](incArg);
+        }
+        else
+        {
+            response = "I am sorry, I do not recognize that command";
+        }
+        bot.say(currentChannel, response);
+
+    }
     function runCmd(incCmd, incFrom)
     {
         var response = "";
@@ -221,7 +238,16 @@
     ];
          return li[Math.floor(Math.random() * li.length)];
     }
-    function readLink()
+    function kateGoogle(incArgs)
     {
+        //var fixed = incArgs.replace(" ", "+");
+        google.resultsPerPage = 25;
+        var nextCounter = 0;
+        google(queryswap, function(err, next, links){
+             if (err) console.error(err);
+             bot.say(currentChannel, links[0].title + ' - ' + links[0].link); //link.href is an alias for link.link
+             bot.say(currentChannel, links[0].description);
+        });
 
+        return 'searching ...';
     }
