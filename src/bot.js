@@ -23,26 +23,7 @@ var path = require('path');
 var google = require('google');
 var irc            = require('irc');
 var currentChannel = "#general";
-var config = {
-    autoConnect: true,
-    autoRejoin: true,
-    certExpired: false,
-    channelPrefixes: "&#",
-    channels: [currentChannel,'#testkate'],
-    debug: false,
-    floodProtection: false,
-    floodProtectionDelay: 1000,
-    messageSplit: 512,
-    port: 6667,
-    realName: 'Kate Libby',
-    sasl: false,
-    secure: false,
-    selfSigned: false,
-    server: "localhost",
-    showErrors: false,
-    stripColors: false,
-    userName: 'kate'
-};
+var config = require('./config');
 var bot = new irc.Client(
     config.server,
     config.userName,
