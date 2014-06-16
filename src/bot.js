@@ -7,23 +7,25 @@
  *
  */
 
- var commandChar = '!';
- var cmd = {};
- var queryswap = "";
+var http    = require('http');
+var url     = require('url');
+var path    = require('path');
+var google  = require('google');
+var irc     = require('irc');
+var config  = require('./config');
 
-cmd['luck']=     function(x) { return kateLuck(); };
-cmd['help']=     function(x) { return kateHelp(); };
-cmd['8ball']=    function(x) { return kate8Ball();};
-cmd['fort']=     function(x) { return kateFortune();};
-cmd['g']=        function(incargs) { return kateGoogle(incargs); };
+var commandChar = '!';
+var queryswap = "";
 
-var http = require('http');
-var url = require('url');
-var path = require('path');
-var google = require('google');
-var irc            = require('irc');
-var currentChannel = "#general";
-var config = require('./config');
+var cmd = require('./command/');
+
+// hard-coded commands
+cmd['luck']     = kateLuck;
+cmd['help']     = kateHelp;
+cmd['8ball']    = kate8Ball;
+cmd['fort']     = kateFortune;
+cmd['g']        = kateGoogle;
+
 var bot = new irc.Client(
     config.server,
     config.userName,
@@ -33,6 +35,7 @@ var bot = new irc.Client(
         username:   config.userName
     }
 );
+var currentChannel = config.channels[0];
 
 
 bot.addListener('error', function(message) {
@@ -92,18 +95,6 @@ function runCmd(incCmd, incFrom, incArg) {
     console.log(incCmd);
     if (typeof cmd[incCmd] == 'function') {
         response = cmd[incCmd](incArg);
-    } else {
-        response = "I am sorry, I do not recognize that command";
-    }
-
-    bot.say(currentChannel, response);
-}
-
-function runCmd(incCmd, incFrom) {
-    var response = "";
-    console.log(incCmd);
-    if (typeof cmd[incCmd] == 'function') {
-        response = cmd[incCmd]();
     } else {
         response = "I am sorry, I do not recognize that command";
     }
