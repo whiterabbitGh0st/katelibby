@@ -10,4 +10,6 @@ config.debug = true;
 config.showErrors = true;
 config.channels = ['#general'];
 
+config.commandChar = '!';
+
 module.exports = config;
