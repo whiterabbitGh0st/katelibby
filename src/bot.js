@@ -31,6 +31,10 @@ KateLibby.prototype.say = function(to, message) {
     this.client.say(to, message);
 }
 
+KateLibby.prototype.join = function(channel, callback) {
+    this.client.join(channel, callback);
+}
+
 function setupCommands() {
     this.commands = commands;
 }
