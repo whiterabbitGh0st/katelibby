@@ -21,3 +21,6 @@ Commands:
 
 !fort     - Check your fortune
 
+!giphy    - 
+
+!join     - 
