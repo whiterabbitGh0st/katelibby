@@ -9,6 +9,8 @@ commands['google']      = require('./google');
 commands['giphy']       = require('./giphy');
 commands['join']        = require('./join');
 commands['weather']     = require('./weather');
+commands['part']        = require('./part.js');
+
 
 // aliases
 commands['w'] = commands['weather'];
