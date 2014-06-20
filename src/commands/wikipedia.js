@@ -1,6 +1,4 @@
-//India
 var request     = require('request');
-//
 module.exports = function kateWeather(katelibby, target, from, args) {
   var api_url = 'http://en.wikipedia.org/w/api.php?format=json&action=query&titles='+args+'&prop=revisions&rvprop=content&callback=?';
   request( api_url, function(error, response, body) {
