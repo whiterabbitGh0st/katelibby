@@ -1,3 +1,4 @@
+//Returns weather from underground weather, !w only allows 500 calls a day and 10 a minute
 var request     = require('request');
 var api_key = 'fabb62f145a3e4ef';
 var api_url = 'http://api.wunderground.com/api/'+api_key+'/conditions/q/';
@@ -13,6 +14,5 @@ module.exports = function kateWeather(katelibby, target, from, args) {
                 katelibby.say(target, returnstring );}
       }
     });
-
     return 'searching ...';
 }
