@@ -10,7 +10,7 @@ commands['giphy']       = require('./giphy');
 commands['join']        = require('./join');
 commands['weather']     = require('./weather');
 commands['part']        = require('./part');
-
+commands['mustache']     = require('./mustache');
 
 // aliases
 commands['w'] = commands['weather'];
