@@ -8,6 +8,7 @@ commands['fortune']     = require('./fortune');
 commands['google']      = require('./google');
 commands['giphy']       = require('./giphy');
 commands['join']        = require('./join');
+commands['bitstamp']    = require('./bitstamp');
 
 // aliases
 commands['g'] = commands['google'];

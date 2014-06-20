@@ -9,6 +9,7 @@
     "dependencies": {
         "google": "0.3.2",
         "irc": "0.3.5",
-        "request": "2.36.0"
+        "request": "2.36.0",
+        "moment": "2.7.0 "
     }
 }
