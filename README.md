@@ -21,6 +21,8 @@ Commands:
 
 !fort     - Check your fortune
 
+!w        - Returns weather from underground weather
+
 !giphy    - 
 
 !join     - 
