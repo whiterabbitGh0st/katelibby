@@ -12,6 +12,7 @@ commands['weather']     = require('./weather');
 commands['part']        = require('./part');
 //commands['mustache']    = require('./mustache');
 //commands['remind']    = require('./remind');
+commands['xkcd']    = require('./xkcd');
 
 // aliases
 commands['w'] = commands['weather'];
