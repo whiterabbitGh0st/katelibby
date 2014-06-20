@@ -21,7 +21,7 @@ Commands:
 
 !fort     - Check your fortune
 
-!w        - Returns weather from underground weather
+!w        - Returns weather from underground weather,  !w only allows 500 calls a day and 10 a minute
 
 !giphy    - 
 
