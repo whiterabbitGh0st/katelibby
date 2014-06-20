@@ -10,8 +10,8 @@ commands['giphy']       = require('./giphy');
 commands['join']        = require('./join');
 commands['weather']     = require('./weather');
 commands['part']        = require('./part');
-//commands['mustache']  = require('./mustache');
-//commands['remind']    = require('./remind');
+//commands['mustache']  = require('./mustache'); //mustache api is broken, it may be online later
+//commands['remind']    = require('./remind');  // still working out bugs
 commands['xkcd']        = require('./xkcd');
 
 // aliases
