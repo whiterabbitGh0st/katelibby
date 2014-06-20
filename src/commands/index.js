@@ -10,10 +10,12 @@ commands['giphy']       = require('./giphy');
 commands['join']        = require('./join');
 commands['weather']     = require('./weather');
 commands['part']        = require('./part');
-commands['mustache']    = require('./mustache');
+//commands['mustache']    = require('./mustache');
+//commands['remind']    = require('./remind');
 
 // aliases
 commands['w'] = commands['weather'];
 commands['g'] = commands['google'];
+//commands['in'] = commands['remind'];
 
 module.exports = commands;
