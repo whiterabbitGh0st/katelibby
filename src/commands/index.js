@@ -10,9 +10,9 @@ commands['giphy']       = require('./giphy');
 commands['join']        = require('./join');
 commands['weather']     = require('./weather');
 commands['part']        = require('./part');
-//commands['mustache']    = require('./mustache');
+//commands['mustache']  = require('./mustache');
 //commands['remind']    = require('./remind');
-commands['xkcd']    = require('./xkcd');
+commands['xkcd']        = require('./xkcd');
 
 // aliases
 commands['w'] = commands['weather'];
