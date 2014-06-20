@@ -23,6 +23,8 @@ Commands:
 
 !w        - Returns weather from underground weather,  !w only allows 500 calls a day and 10 a minute
 
+!mustache - take any image URL, and using http://mustachify.me/ it ads a mustache to image.
+
 !giphy    - 
 
 !join     - 
