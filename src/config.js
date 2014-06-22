@@ -21,8 +21,8 @@ config.production: {
         host: '127.0.0.1',
         port: '27017',
         db:   'dbnamehere',
-        User: 'readUsername',
-        Pass: ''//Kate will prompt for passwords, then save it to here. 
+        user: 'readUsername',
+        pass: ''//Kate will prompt for passwords, then save it to here. 
     },
     dbuser
     //server details
