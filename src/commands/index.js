@@ -15,6 +15,7 @@ commands['weather']     = require('./weather');
 //commands['remind']    = require('./remind');  // still working out bugs
 commands['xkcd']        = require('./xkcd');
 commands['woot']        = require('./woot');
+commands['mtastatus']   = require('./mtastatus');
 
 // aliases
 commands['w'] = commands['weather'];
