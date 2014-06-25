@@ -35,6 +35,10 @@ KateLibby.prototype.join = function(channel, callback) {
     this.client.join(channel, callback);
 }
 
+KateLibby.prototype.part = function(channel, msg, callback) {
+    this.client.part(channel, msg, callback);
+}
+
 function setupCommands() {
     this.commands = commands;
 }
