@@ -11,6 +11,7 @@ var http        = require('http');
 var url         = require('url');
 var path        = require('path');
 var irc         = require('irc');
+var schedule    = require('node-schedule');
 var config      = require('./config');
 var commands    = require('./commands/');
 
@@ -21,7 +22,7 @@ var urlRegex = new RegExp('^(?!mailto:)(?:(?:http|https|ftp)://)(?:\\S+(?::\\S*)
 
 var KateLibby = function() {
     this.config = config;
-
+    this.eventStack = [];
     setupCommands.call(this);
     setupIRCBot.call(this);
     setupMessageHandler.call(this);
@@ -38,6 +39,12 @@ KateLibby.prototype.join = function(channel, callback) {
 KateLibby.prototype.part = function(channel, msg, callback) {
     this.client.part(channel, msg, callback);
 }
+
+KateLibby.prototype.addEvent = function(date, msg, dest, callback) {
+    var nEvent = schedule.scheduleJob(date, function (){ callback(dest,msg); });
+    this.eventStack += nEvent;
+}
+
 
 function setupCommands() {
     this.commands = commands;
