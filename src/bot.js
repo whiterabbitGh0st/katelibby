@@ -7,18 +7,15 @@
  *
  */
 
-var http        = require('http');
-var url         = require('url');
-var path        = require('path');
 var irc         = require('irc');
 var schedule    = require('node-schedule');
+var request     = require('request');
 var config      = require('./config');
 var commands    = require('./commands/');
+var urlRegex    = require('./url-regex');
 
 var commandChar = config.commandChar;
 var commandPattern = new RegExp('^' + commandChar + '(\\w+) ?(.*)');
-
-var urlRegex = new RegExp('^(?!mailto:)(?:(?:http|https|ftp)://)(?:\\S+(?::\\S*)?@)?(?:(?:(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[0-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)(?:\\.(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)*(?:\\.(?:[a-z\\u00a1-\\uffff]{2,})))|localhost)(?::\\d{2,5})?(?:(/|\\?|#)[^\\s]*)?$', 'i');
 
 var KateLibby = function() {
     this.config = config;
@@ -64,6 +61,7 @@ function setupMessageHandler() {
     this.client.on('message', function(from, to, text, message) {
         var target = (to === katelibby.nick ? from : to);
         var match = text.match(commandPattern);
+        var url;
         if (match) {
             command = match[1];
             args = match[2];
@@ -74,8 +72,8 @@ function setupMessageHandler() {
                     katelibby.say(target, result.toString());
                 }
             }
-        } else if (isURL(text)) {
-            getTitle(text, function(title) {
+        } else if (url = isURL(text)) {
+            getTitle(url, function(title) {
                 katelibby.say(target, '[' + title + ']');
             });
         }
@@ -84,22 +82,24 @@ function setupMessageHandler() {
 
 // --- Util ---
 function isURL(str) {
-    return str.length < 2083 && urlRegex.test(str);
+    var match;
+    if (str.length < 2083 && (match = str.match(urlRegex))) {
+        return match[0];
+    }
+
+    return false;
 }
 
-function getTitle(incurl, callback) {
-    var ahost = url.parse(incurl).hostname;
-    var apath = url.parse(incurl).pathname;
-    var urlOpts = {host: ahost, path: apath, port: '80'};
-    var re = /(<\s*title[^>]*>(.+?)<\s*\/\s*title)>/ig;
-    http.get(urlOpts, function (response) {
-        response.on('data', function (chunk) {
-            var str=chunk.toString();
-            var match = re.exec(str);
+function getTitle(url, callback) {
+    var url = (url.indexOf('http') !== 0 ? 'http://' + url : url);
+    var titleRegex = /(<\s*title[^>]*>(.+?)<\s*\/\s*title)>/ig;
+    request(url, function(error, response, body) {
+        if (!error && response.statusCode == 200) {
+            var match = titleRegex.exec(body);
             if (match && match[2]) {
                 callback(match[2]);
             }
-        });
+        }
     });
 }
 
