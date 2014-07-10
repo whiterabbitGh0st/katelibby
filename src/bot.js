@@ -11,9 +11,10 @@ var irc         = require('irc');
 var schedule    = require('node-schedule');
 var request     = require('request');
 var entities    = require('entities');
-var config      = require('./config');
 var commands    = require('./commands/');
+var config      = require('./config');
 var urlRegex    = require('./url-regex');
+var pkginfo     = require('../package.json');
 
 var commandChar = config.commandChar;
 var commandPattern = new RegExp('^' + commandChar + '(\\w+) ?(.*)');
@@ -105,4 +106,5 @@ function getTitle(url, callback) {
     });
 }
 
+console.log('katelibby ' + pkginfo.version)
 new KateLibby();
