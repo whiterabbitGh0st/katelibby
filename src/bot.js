@@ -38,8 +38,8 @@ KateLibby.prototype.part = function(channel, msg, callback) {
     this.client.part(channel, msg, callback);
 }
 
-KateLibby.prototype.addEvent = function(date, msg, dest, callback) {
-    var nEvent = schedule.scheduleJob(date, function (){ callback(dest,msg); });
+KateLibby.prototype.addEvent = function(date, callback, data) {
+    var nEvent = schedule.scheduleJob(date, function (){ callback(data); });
     this.eventStack += nEvent;
 }
 
