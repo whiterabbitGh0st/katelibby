@@ -10,6 +10,7 @@
 var irc         = require('irc');
 var schedule    = require('node-schedule');
 var request     = require('request');
+var entities    = require('entities');
 var config      = require('./config');
 var commands    = require('./commands/');
 var urlRegex    = require('./url-regex');
@@ -97,7 +98,8 @@ function getTitle(url, callback) {
         if (!error && response.statusCode == 200) {
             var match = titleRegex.exec(body);
             if (match && match[2]) {
-                callback(match[2]);
+                var decodedTitle = entities.decodeHTML(match[2]);
+                callback(decodedTitle);
             }
         }
     });
