@@ -1,7 +1,7 @@
 var chrono = require('chrono-node');
 
 module.exports = function(katelibby, target, from, args) {
-  var parseResults = chrono.parse(args),
+  var parseResults = chrono.parse("in "+args),
       parseResult  = parseResults && parseResults[0] ? parseResults[0] : null;
 
   if (parseResult) {
