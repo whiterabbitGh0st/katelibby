@@ -17,17 +17,21 @@ Commands:
 
 !g        - Queries google and returns the first result.
 
-!giphy    -
+!giphy    - returns a gif based on query
 
 !help     - displays a help message
 
-!join     -
+!in       - Has kate send your message as a reminder to you at a certain time.
+
+!join     - Allows kate to join a specified channel
 
 !luck     - Test your luck, and see how good it is
 
+!mtastatus - returns the MTA status of the certain line. 
+
 !mustache - take any image URL, and using http://mustachify.me/ it ads a mustache to image.
 
-!remind   - also as !in,
+!remind   - see !in
 
 !w        - Returns weather from underground weather,  !w only allows 500 calls a day and 10 a minute
 
@@ -36,3 +40,4 @@ Commands:
 !woot     - returns the latest woot sale
 
 !xkcd     - returns random xkcd comic
+
