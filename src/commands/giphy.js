@@ -15,7 +15,7 @@ module.exports = function(katelibby, target, from, args) {
     request({url: url, json: true}, function(error, response, body) {
         if (!error && response.statusCode == 200) {
             if (typeof body.data[0] === 'undefined') { katelibby.say(target, "Are you trying to make me crash?");}
-            else { katelibby.say(target, body.data[Math.floor(Math.random() * (10 + 1))].images.original.url);}
+            else { katelibby.say(target, body.data[Math.floor(Math.random() * (10))].images.original.url);}
         }
     });
 };
