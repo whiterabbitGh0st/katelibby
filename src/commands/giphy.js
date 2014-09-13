@@ -1,7 +1,7 @@
 var querystring = require('querystring');
 var request     = require('request');
 
-var api_key = 'dc6zaTOxFJmzC';
+var api_key = '...';
 var api_url = 'http://api.giphy.com/v1/gifs/search?';
 
 module.exports = function(katelibby, target, from, args) {
