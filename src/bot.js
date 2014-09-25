@@ -80,7 +80,7 @@ function setupMessageHandler() {
             });
         } else if (subreddit = isSUB(text)) {
             getSub(subreddit, function(sub) {
-                katelibby.say(target, '[' + sub + ']');
+                katelibby.say(target, sub );
             });
         }
     });
@@ -98,7 +98,7 @@ function isURL(str) {
 
 function isSUB(str) {
     var match;
-    if (str.length < 2083 && (match = str.match("\/r\/([^\s\/]+)"))) {
+    if (str.length < 2083 && (match = str.match(/\/r\/([^\s\/]+)/i))) {
         return match[0];
     }
 
@@ -106,7 +106,8 @@ function isSUB(str) {
 }
 
 function getSub(sub, callback) {
-    return "http://reddit.com" + sub;
+    
+    callback( "Are we talking about http://www.reddit.com" + sub + "/ ?");
 }
 
 function getTitle(url, callback) {
