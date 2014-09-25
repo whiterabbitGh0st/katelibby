@@ -63,7 +63,7 @@ function setupMessageHandler() {
     this.client.on('message', function(from, to, text, message) {
         var target = (to === katelibby.nick ? from : to);
         var match = text.match(commandPattern);
-        var url;
+        var url, subreddit;
         if (match) {
             command = match[1];
             args = match[2];
@@ -78,6 +78,10 @@ function setupMessageHandler() {
             getTitle(url, function(title) {
                 katelibby.say(target, '[' + title + ']');
             });
+        } else if (subreddit = isSUB(text)) {
+            getSub(subreddit, function(sub) {
+                katelibby.say(target, '[' + sub + ']');
+            });
         }
     });
 }
@@ -90,6 +94,19 @@ function isURL(str) {
     }
 
     return false;
+}
+
+function isSUB(str) {
+    var match;
+    if (str.length < 2083 && (match = str.match("\/r\/([^\s\/]+)"))) {
+        return match[0];
+    }
+
+    return false;
+}
+
+function getSub(sub, callback) {
+    return "http://reddit.com" + sub;
 }
 
 function getTitle(url, callback) {
