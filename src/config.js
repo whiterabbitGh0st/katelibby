@@ -8,7 +8,7 @@ config.realName = "Kate Libby"
 
 config.debug = true;
 config.showErrors = true;
-config.channels = ['#general'];
+config.channels = ['#general,#dangerroom'];
 
 config.commandChar = '!';
 
