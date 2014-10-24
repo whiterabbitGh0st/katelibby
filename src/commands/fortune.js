@@ -7,10 +7,8 @@ module.exports = function(katelibby, target, from, args) {
         'You have a deep appreciation of the arts and music.',
         'The great joy in life is doing what people say you cannot do.',
         'Invest in Bitcoins, I see great profits in your future.',
-        'I see Anal sex in your future',
         'When you squeeze and orange, orange juice comes out - because that is whats inside',
         'Every exit is an entrance to new experiences',
-        'ask your mom',
         'Today is the tomorrow we worried about yesterday',
         'There are no limitations to the mind except those we aknowledge.',
         'Old dreams never die they just get filed away.',
@@ -28,7 +26,7 @@ module.exports = function(katelibby, target, from, args) {
         'Courtesy is contagious',
         'Sometimes when you get denied at the front door, the back door is unlocked',
         'Constant grinding can turn an iron rod into a needle.',
-        'Anal Joke',
+        'Avoid Senseless contradictions with others.',
         'Too many people volunteer to carry the stool when its time to move the piano',
         'You will always get what you want through your charm and personality.',
         'Luck sometimes visits a fool, but it never sits down with him.',
@@ -38,7 +36,27 @@ module.exports = function(katelibby, target, from, args) {
         'Birds are entangled by their feet and men by their tongues.',
         'Starting down the right path is pointless, if you are just going to take a wrong turn at the first fork.',
         'The possibility of a career change is near.',
-        '404 fortune not found'
+        '404 fortune not found',
+        'Great works are performed not by strength, but by perserverance',
+        'All men should try to learn before they die what they are running from, and to, and why.',
+        'Our deeds determine us, as much as we determine our deeds.',
+        'Its amazing how much good you can do if you dont care who gets the credit.',
+        'Its better to be alone sometimes.',
+        'Let the deeds speak.',
+        'Lucky Numbers 4, 8, 15, 16, 23 and 42',
+        'Never give up. Always find a reason to keep trying.',
+        'Accept your past without regrets. Handle your present with confidence. Face your future without fear.',
+        'Don’t be discouraged, because every wrong attempt discarded is another step forward.',
+        'Never give up, until you are getting paid to',//og
+        'Dont spend time. Invest it.',
+        'Sometimes the path less traveled is more muddy',
+        'Your loyalty is a virtue, but not when its wedded with blind stubbornness.',
+        'Life is too short for time cards',
+        'Every lunch is a chance to reinvent the meal',
+        'You are here to create not merely survive',
+        'Enthusiasm is as contagious as apathy', 
+        'Alas, the onion you eat is some one elses water lily',
+        'Why ask for advice if you wont take any'
     ];
     return li[Math.floor(Math.random() * li.length)];
 }
