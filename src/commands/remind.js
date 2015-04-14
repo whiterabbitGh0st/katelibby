@@ -6,7 +6,7 @@ module.exports = function(katelibby, target, from, args) {
 
   if (parseResult) {
     var when = parseResult.startDate,
-        reminder = args.slice(parseResult.index + parseResult.text.length).trim();
+        reminder = args.slice(parseResult.index + parseResult.text.length + 2).trim();
 
     katelibby.addEvent(when, function() {
         katelibby.say(target, from + ': ' + reminder);
