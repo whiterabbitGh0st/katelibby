@@ -17,5 +17,8 @@
         "entities": "1.1.1",
         "node-schedule": "0.1.13",
         "chrono-node": "0.1.10"
+    },
+    "scripts": {
+        "start": "node src/bot.js"
     }
 }

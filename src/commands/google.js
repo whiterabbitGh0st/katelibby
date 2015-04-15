@@ -6,10 +6,15 @@ module.exports = function kateGoogle(katelibby, target, from, args) {
     google(args, function(err, next, links) {
         if (err) {
             console.error(err);
+            return;
         }
 
-        katelibby.say(target, links[0].title + ' - ' + links[0].link); //link.href is an alias for link.link
-        katelibby.say(target, links[0].description);
+        if (links && links.length) {
+            katelibby.say(target, links[0].title + ' - ' + links[0].href);
+            katelibby.say(target, links[0].description);
+        } else {
+            katelibby.say(target, 'Nothing found, try harder.');
+        }
     });
 
     return 'searching ...';
