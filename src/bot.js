@@ -139,8 +139,10 @@ function checkSpec(str) {
         return match[0];
     } else if (match = str.match(/hungry/i)){
         return match[0];
-    } else if (match = str.match(/honestly/g)){
+    } else if (match = str.match(/honestly/gi)){
         return match.length;
+    } else if (match = str.match(/tbh/i)){
+        return match.length; 
     }
 
     return false;
