@@ -151,12 +151,12 @@ function checkSpec(str) {
 function getSpec(potato,ikl, callback) {
     var kl = ikl;
     var keyWord = potato.toUpperCase();
-    if(keyWord==="redhead"){ callback("Did some one say redheads?"); }
-    else if(typeof keyWord == "number"){ kl.incPC(keyWord); callback("Honesty Count:"+kl.getPC());}
-    else if(keyWord === "hungry"){callback("Food!");}
-    else if(keyWord === "bruce jenner"){ callback("her name is caitlyn jenner");}
-    else if(keyWord === "drunk"){ callback("ツ"); }
-    else if(keyWord === "tbh") { kl.incPC(keyWord); callback("Honesty Count:"+kl.getPC());}
+    if(keyWord==="REDHEAD"){ callback("Did some one say redheads?"); }
+    else if(typeof keyWord == "NUMBER"){ kl.incPC(keyWord); callback("Honesty Count:"+kl.getPC());}
+    else if(keyWord === "HUNGRY"){callback("Food!");}
+    else if(keyWord === "BRUCE JENNER"){ callback("her name is caitlyn jenner");}
+    else if(keyWord === "DRUNK"){ callback("ツ"); }
+    else if(keyWord === "TBH") { kl.incPC(keyWord); callback("Honesty Count:"+kl.getPC());}
     else {
         //do nothing
     }
