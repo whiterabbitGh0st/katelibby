@@ -25,10 +25,26 @@ var KateLibby = function() {
     setupCommands.call(this);
     setupIRCBot.call(this);
     setupMessageHandler.call(this);
+    this.pc = 0;
+    this.wordlist=[];
+
+}
+
+KateLibby.prototype.getPC = function() {
+    return this.pc;
+}
+
+KateLibby.prototype.incPC = function(numb) {
+    this.pc += numb;
+}
+
+KateLibby.prototype.addWord = function(newWord) {
+    this.wordlist.push(newWord);
 }
 
 KateLibby.prototype.say = function(to, message) {
-    this.client.say(to, message);
+   var coloredstring = irc.colors.wrap("magenta", message);
+    this.client.say(to, coloredstring);
 }
 
 KateLibby.prototype.join = function(channel, callback) {
@@ -79,8 +95,13 @@ function setupMessageHandler() {
                 katelibby.say(target, '[' + title + ']');
             });
         } else if (subreddit = isSUB(text)) {
+                //katelibby.say(target, );
             getSub(subreddit, function(sub) {
-                katelibby.say(target, sub );
+                katelibby.say(target,  sub );
+            });
+        } else if (hotword = checkSpec(text)) {
+            getSpec( hotword , katelibby, function(response) {
+                katelibby.say(target, response);
             });
         }
     });
@@ -106,8 +127,35 @@ function isSUB(str) {
 }
 
 function getSub(sub, callback) {
-    
-    callback( "Are we talking about http://www.reddit.com" + sub + "/ ?");
+    callback( "Are you talking about http://www.reddit.com" + sub + "/ ?");
+}
+
+function checkSpec(str) {
+    if (match = str.match(/redhead/i)) {
+        return match[0];
+    } else if (match = str.match(/drunk/i)) {
+        return match[0];
+    } else if (match = str.match(/bruce jenner/g)){
+        return match[0];
+    } else if (match = str.match(/hungry/i)){
+        return match[0];
+    } else if (match = str.match(/honestly/g)){
+        return match.length;
+    }
+
+    return false;
+}
+
+function getSpec(potato,ikl, callback) {
+    var kl = ikl;
+    if(potato==="redhead"){ callback("Did some one say redheads?"); }
+    else if(typeof potato == "number"){ kl.incPC(potato); callback("Honesty Count:"+kl.getPC());}
+    else if(potato === "hungry"){callback("Food!");}
+    else if(potato === "bruce jenner"){ callback("her name is caitlyn jenner");}
+    else if(potato === "drunk" ){ callback("ツ"); }
+    else {
+        //do nothing
+    }
 }
 
 function getTitle(url, callback) {
