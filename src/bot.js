@@ -135,7 +135,7 @@ function checkSpec(str) {
         return match[0];
     } else if (match = str.match(/drunk/i)) {
         return match[0];
-    } else if (match = str.match(/bruce jenner/g)){
+    } else if (match = str.match(/bruce jenner/gi)){
         return match[0];
     } else if (match = str.match(/hungry/i)){
         return match[0];
@@ -150,11 +150,13 @@ function checkSpec(str) {
 
 function getSpec(potato,ikl, callback) {
     var kl = ikl;
-    if(potato==="redhead"){ callback("Did some one say redheads?"); }
-    else if(typeof potato == "number"){ kl.incPC(potato); callback("Honesty Count:"+kl.getPC());}
-    else if(potato === "hungry"){callback("Food!");}
-    else if(potato === "bruce jenner"){ callback("her name is caitlyn jenner");}
-    else if(potato === "drunk" ){ callback("ツ"); }
+    var keyWord = potato.toUpperCase();
+    if(keyWord==="redhead"){ callback("Did some one say redheads?"); }
+    else if(typeof keyWord == "number"){ kl.incPC(keyWord); callback("Honesty Count:"+kl.getPC());}
+    else if(keyWord === "hungry"){callback("Food!");}
+    else if(keyWord === "bruce jenner"){ callback("her name is caitlyn jenner");}
+    else if(keyWord === "drunk"){ callback("ツ"); }
+    else if(keyWord === "tbh") { kl.incPC(keyWord); callback("Honesty Count:"+kl.getPC());}
     else {
         //do nothing
     }
